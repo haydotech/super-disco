@@ -1,9 +1,10 @@
 from collections import namedtuple
 from random import choice
 
+
 Deck = namedtuple(
     typename='Deck',
-    field_names=['rank', 'suit']
+    field_names=['rank', 'suit'],
 )
 
 
@@ -27,42 +28,21 @@ class PlayCard():
     def pick_random_card(self):
         return choice(self._cards)
 
-    def show_card(self, index):
-        return f"""
-         ___
-        |  {self._cards[index].suit}|
-        | {self._cards[index].rank} |
-        |{self._cards[index].suit}__|
-        """
-
     def show_random_card(self):
         random_card = self.pick_random_card()
-        print(random_card)
-        # if random_card.rank != '10':
-        #     return f"""
-        #      ___
-        #     |  {random_card.suit}|
-        #     | {random_card.rank} |
-        #     |{random_card.suit}__|
-        #     """
-        # else:
         return f"""
-         ______
-        |     {random_card.suit}|
-        |      |
-        |  {random_card.rank}   |
-        |      |
-        |{random_card.suit}_____|
+         ___
+        |  {random_card.suit}|
+        |{random_card.rank
+          if random_card.rank == '10'
+          else ' ' + random_card.rank} |
+        |{random_card.suit}__|
         """
 
     def __repr__(self):
         return f"{self._cards}"
 
 
-my_cards_obj = PlayCard()
-# print(my_cards_obj.pick_random_card())
-# print(my_cards_obj._cards)
-# print(my_cards_obj[:3])
-# print(my_cards_obj[48:])
-# print(len(my_cards_obj._cards))
-print(my_cards_obj.show_random_card())
+if __name__ == "__main__":
+    my_cards_obj = PlayCard()
+    print(my_cards_obj.show_random_card())
